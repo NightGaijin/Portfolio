@@ -48,32 +48,32 @@ export default function Portfolio() {
     <div className="relative min-h-screen overflow-x-hidden font-sans bg-gradient-to-br from-black via-purple-900 to-black text-white">
 
       {/* Background particles */}
-      <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
-        {particles.map((p) => (
-          <motion.div
-            key={p.id}
-            className="absolute rounded-full bg-purple-400"
-            style={{
-              left: p.left,
-              top: p.top,
-              width: `${p.size}px`,
-              height: `${p.size}px`,
-              opacity: p.opacity,
-              filter: "blur(0.3px)",
-            }}
-            animate={{
-              opacity: [0.08, 0.65, 0.12],
-              scale: [1, 1.8, 1],
-            }}
-            transition={{
-              duration: p.duration,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: p.delay,
-            }}
-          />
-        ))}
-      </div>
+<div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+  {particles.map((p) => (
+    <motion.div
+      key={p.id}
+      className="absolute rounded-full bg-purple-500"
+      style={{
+        left: p.left,
+        top: p.top,
+        width: `${p.size * 2}px`,   // aumenta o tamanho
+        height: `${p.size * 2}px`,
+        opacity: p.opacity + 0.15,  // aumenta opacidade inicial
+        filter: "blur(1.2px)",      // blur mais visível
+      }}
+      animate={{
+        opacity: [0.1, 0.7, 0.1],  // piscando lentamente
+        scale: [1, 2.2, 1],        // efeito de “pulso”
+      }}
+      transition={{
+        duration: p.duration,
+        repeat: Infinity,
+        ease: "easeInOut",
+        delay: p.delay,
+      }}
+    />
+  ))}
+</div>
 
       {/* Hero Section */}
       <section className="min-h-[70vh] flex flex-col justify-center items-center text-center pt-20 px-6">
