@@ -110,32 +110,32 @@ export default function Portfolio() {
       </section>
 
       {/* Portfolio Section */}
-      <section className="px-6 py-10 max-w-6xl mx-auto">
-        <h2 className="text-3xl font-semibold mb-6">Portfolio</h2>
+<section className="px-6 py-10 max-w-6xl mx-auto">
+  <h2 className="text-3xl font-semibold mb-6">Portfolio</h2>
 
-        <div className="flex gap-6 overflow-x-auto pb-4 snap-x snap-mandatory">
-          {videos.map((video, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ scale: 1.05 }}
-              className="snap-center min-w-[380px] bg-black/40 backdrop-blur-md rounded-2xl p-4 shadow-xl border border-purple-500/20"
-            >
-              <div className="aspect-video mb-4">
-                <iframe
-                  className="w-full h-full rounded-xl"
-                  src={video.embed}
-                  title={video.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-
-              <h3 className="text-xl font-medium">{video.title}</h3>
-            </motion.div>
-          ))}
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {videos.map((video, index) => (
+      <motion.div
+        key={index}
+        whileHover={{ scale: 1.05 }}
+        className="bg-black/40 backdrop-blur-md rounded-2xl p-4 shadow-xl border border-purple-500/20"
+      >
+        <div className="aspect-video mb-4 w-full">
+          <iframe
+            className="w-full h-full rounded-xl"
+            src={video.embed}
+            title={video.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
         </div>
-      </section>
+
+        <h3 className="text-xl font-medium">{video.title}</h3>
+      </motion.div>
+    ))}
+  </div>
+</section>
 
       {/* Features Section */}
       <section className="px-6 py-20 max-w-6xl mx-auto">
