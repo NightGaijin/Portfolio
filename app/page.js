@@ -30,13 +30,13 @@ export default function Portfolio() {
   ];
 
   const particles = useMemo(() => {
-    return Array.from({ length: 35 }, (_, i) => ({
+    return Array.from({ length: 40 }, (_, i) => ({
       id: i,
-      left: `${(i * 7.3) % 100}%`,
-      top: `${(i * 13.7) % 100}%`,
+      left: `${(i * 8.2) % 100}%`,
+      top: `${(i * 11.7) % 100}%`,
       size: 2 + (i % 3),
-      delay: (i % 10) * 0.35,
-      duration: 4 + (i % 6) * 1.1,
+      delay: (i % 10) * 0.3,
+      duration: 5 + (i % 5) * 1,
       opacity: 0.12 + (i % 4) * 0.08,
     }));
   }, []);
@@ -46,12 +46,13 @@ export default function Portfolio() {
 
   return (
     <div className="relative min-h-screen overflow-x-hidden font-sans bg-gradient-to-br from-black via-purple-900 to-black text-white">
-      {/* Animated background particles */}
+
+      {/* Background particles */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
         {particles.map((p) => (
           <motion.div
             key={p.id}
-            className="absolute rounded-full bg-purple-300"
+            className="absolute rounded-full bg-purple-400"
             style={{
               left: p.left,
               top: p.top,
@@ -132,18 +133,26 @@ export default function Portfolio() {
       {/* Portfolio Section */}
       <section className="px-6 py-10 max-w-6xl mx-auto">
         <h2 className="text-3xl font-semibold mb-6">Portfolio</h2>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {videos.map((video, index) => (
+          {videos.map((video, i) => (
             <motion.div
-              key={index}
+              key={i}
               whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 260, damping: 18 }}
-              className="relative overflow-hidden rounded-2xl bg-black/40 backdrop-blur-md p-4 shadow-xl border border-purple-500/20"
+              className="relative rounded-2xl p-4 shadow-xl border border-purple-500/30 bg-black/40 backdrop-blur-md overflow-hidden"
             >
-              <div className="absolute inset-0 rounded-2xl border border-purple-400/20 shadow-[0_0_18px_rgba(168,85,247,0.18)] pointer-events-none" />
-
-              <div className="aspect-video mb-4 w-full overflow-hidden rounded-xl">
+              {/* Neon border */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl pointer-events-none"
+                animate={{
+                  boxShadow: [
+                    "0 0 0px rgba(168,85,247,0.1)",
+                    "0 0 18px rgba(168,85,247,0.6)",
+                    "0 0 0px rgba(168,85,247,0.1)",
+                  ],
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <div className="aspect-video mb-4 w-full rounded-xl overflow-hidden">
                 <iframe
                   className="w-full h-full"
                   src={video.embed}
@@ -153,7 +162,6 @@ export default function Portfolio() {
                   allowFullScreen
                 />
               </div>
-
               <h3 className="text-xl font-medium text-center">{video.title}</h3>
             </motion.div>
           ))}
@@ -161,74 +169,63 @@ export default function Portfolio() {
       </section>
 
       {/* Features Section */}
-      <section className="px-6 py-20 max-w-6xl mx-auto">
-        <div className="flex flex-col gap-8">
-          {features.map((item, i) => (
+      <section className="px-6 py-20 max-w-6xl mx-auto flex flex-col gap-8">
+        {features.map((item, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: i * 0.2 }}
+            whileHover={{ scale: 1.03 }}
+            className="relative overflow-hidden rounded-3xl p-8 flex items-center gap-6 bg-black/50 backdrop-blur-xl border border-purple-500/30 shadow-2xl"
+          >
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: i * 0.2 }}
-              whileHover={{
-                scale: 1.03,
-                boxShadow: "0 0 25px rgba(168,85,247,0.6)",
+              className="absolute inset-0 rounded-3xl pointer-events-none"
+              animate={{
+                boxShadow: [
+                  "0 0 0px rgba(168,85,247,0.1)",
+                  "0 0 20px rgba(168,85,247,0.6)",
+                  "0 0 0px rgba(168,85,247,0.1)",
+                ],
               }}
-              className="relative overflow-hidden bg-black/50 backdrop-blur-xl rounded-3xl p-8 border border-purple-500/30 shadow-2xl flex flex-row items-center text-left gap-6"
-            >
-              <motion.div
-                className="absolute inset-0 rounded-3xl border border-purple-400/20 pointer-events-none"
-                animate={{
-                  boxShadow: [
-                    "0 0 0px rgba(168,85,247,0.15)",
-                    "0 0 24px rgba(168,85,247,0.4)",
-                    "0 0 0px rgba(168,85,247,0.15)",
-                  ],
-                }}
-                transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-              />
-
-              <div className="relative z-10 p-4 rounded-full bg-purple-600/20 border border-purple-500">
-                {item.icon}
-              </div>
-
-              <div className="relative z-10">
-                <h3 className="text-2xl font-semibold mb-2 text-purple-200">
-                  {item.title}
-                </h3>
-                <p className="text-purple-300 text-sm max-w-md">
-                  {item.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <div className="relative z-10 p-4 rounded-full bg-purple-600/20 border border-purple-500">
+              {item.icon}
+            </div>
+            <div className="relative z-10">
+              <h3 className="text-2xl font-semibold mb-2 text-purple-200">{item.title}</h3>
+              <p className="text-purple-300 text-sm max-w-md">{item.desc}</p>
+            </div>
+          </motion.div>
+        ))}
       </section>
 
-      {/* Contact */}
+      {/* Contact Section */}
       <section className="py-16 px-6 text-center">
         <h2 className="text-3xl font-semibold">Contact Me</h2>
 
         <div className="mt-8 flex flex-col md:flex-row items-center justify-center gap-4">
-          {/* Email box */}
+          {/* Email */}
           <motion.div
             className="relative overflow-hidden rounded-2xl px-6 py-4 bg-black/45 backdrop-blur-xl border border-purple-500/30 shadow-lg"
             animate={{
               boxShadow: [
-                "0 0 10px rgba(168,85,247,0.15)",
-                "0 0 24px rgba(168,85,247,0.45)",
-                "0 0 10px rgba(168,85,247,0.15)",
+                "0 0 0px rgba(168,85,247,0.15)",
+                "0 0 22px rgba(168,85,247,0.6)",
+                "0 0 0px rgba(168,85,247,0.15)",
               ],
             }}
-            transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <div className="absolute inset-0 rounded-2xl border border-purple-400/20 pointer-events-none" />
+            <div className="absolute inset-0 rounded-2xl pointer-events-none border border-purple-400/20" />
             <p className="relative z-10 text-purple-200 font-medium">
               nightgaijimbusiness@email.com
             </p>
           </motion.div>
 
-          {/* WhatsApp button */}
+          {/* WhatsApp */}
           <motion.a
             href={`https://wa.me/5581912345678?text=${encodeURIComponent(contactText)}`}
             target="_blank"
@@ -238,14 +235,14 @@ export default function Portfolio() {
             whileTap={{ scale: 0.98 }}
             animate={{
               boxShadow: [
-                "0 0 10px rgba(168,85,247,0.15)",
-                "0 0 24px rgba(168,85,247,0.45)",
-                "0 0 10px rgba(168,85,247,0.15)",
+                "0 0 0px rgba(168,85,247,0.15)",
+                "0 0 22px rgba(168,85,247,0.6)",
+                "0 0 0px rgba(168,85,247,0.15)",
               ],
             }}
-            transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
           >
-            <div className="absolute inset-0 rounded-2xl border border-purple-400/20 pointer-events-none" />
+            <div className="absolute inset-0 rounded-2xl pointer-events-none border border-purple-400/20" />
             <span className="relative z-10 flex items-center gap-2">
               <MessageCircle size={18} />
               Converse no WhatsApp
