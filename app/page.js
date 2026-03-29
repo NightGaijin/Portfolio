@@ -168,7 +168,7 @@ export default function Portfolio() {
 
       {/* Contact */}
       <section className="text-center py-16">
-        <h2 className="text-3xl font-semibold">Contact</h2>
+        <h2 className="text-3xl font-semibold">Contact Me</h2>
         <p className="text-purple-300 mt-4">nightgaijimbusiness@email.com</p>
       </section>
     </div>
