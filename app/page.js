@@ -118,7 +118,7 @@ export default function Portfolio() {
         </motion.p>
 
         <motion.a
-          href="https://wa.me/5581912345678?text=Hi%2C%20I%27m%20interested%20in%20your%20video%20editing%20services.%20Can%20we%20discuss%20about%20it%3F"
+          href="https://wa.me/5581994339483?text=Hi%2C%20I%27m%20interested%20in%20your%20video%20editing%20services.%20Can%20we%20discuss%20about%20it%3F"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0 }}
@@ -227,7 +227,7 @@ export default function Portfolio() {
 
           {/* WhatsApp */}
           <motion.a
-            href={`https://wa.me/5581912345678?text=${encodeURIComponent(contactText)}`}
+            href={`https://wa.me/5581994339483?text=${encodeURIComponent(contactText)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="relative overflow-hidden rounded-2xl px-6 py-4 bg-black/45 backdrop-blur-xl border border-purple-500/30 shadow-lg flex items-center gap-2 font-medium text-purple-100 hover:text-white transition"
