@@ -18,12 +18,12 @@ export default function Portfolio() {
     },
     {
       title: "Functional Ads",
-      desc: "I create mid-video ads that people actually engage with, helping you attract more sponsors.",
+      desc: "Creating mid-video ads that people actually engage with, helping you attract more sponsors.",
       icon: <Megaphone size={28} />,
     },
     {
       title: "Fast Delivery",
-      desc: "I start editing as soon as you send the footage and deliver it as quickly as possible—often before the deadline.",
+      desc: "The editing will start as soon as you send the footage and you'll receive it as quickly as possible, often before the deadline.",
       icon: <Clock size={28} />,
     },
   ];
