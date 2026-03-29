@@ -5,9 +5,9 @@ import { Eye, Clock, Megaphone } from "lucide-react";
 
 export default function Portfolio() {
   const videos = [
-    { title: "Video 1", embed: "https://www.youtube.com/embed/qCcaXwJjQjM" },
-    { title: "Video 2", embed: "https://www.youtube.com/embed/9kvH7MZkcds" },
-    { title: "Video 3", embed: "https://www.youtube.com/embed/3oYpHiIzU1w" },
+    { title: "Fast-Paced", embed: "https://www.youtube.com/embed/qCcaXwJjQjM" },
+    { title: "Entertainment", embed: "https://www.youtube.com/embed/9kvH7MZkcds" },
+    { title: "Informative", embed: "https://www.youtube.com/embed/3oYpHiIzU1w" },
   ];
 
   const features = [
