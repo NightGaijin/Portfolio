@@ -178,7 +178,7 @@ export default function Portfolio() {
         <h2 className="text-2xl mb-4">Contact Me</h2>
 
         <div className="flex gap-4 justify-center flex-wrap">
-          <MagneticButton text="Email" link="mailto:nightgaijimbusiness@email.com" />
+          <MagneticButton text="nightgaijimbusiness@gmail.com" link="mailto:nightgaijimbusiness@email.com" />
           <MagneticButton text="WhatsApp" link="https://wa.me/5581994339483" green />
         </div>
       </section>
