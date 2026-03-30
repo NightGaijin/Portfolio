@@ -36,7 +36,7 @@ export default function Portfolio() {
     },
     {
       title: "Fast Turnaround",
-      desc: "Delivery within 24–48 hours without compromising quality.",
+      desc: "Your video will be delivered as quickly as possible — often before the deadline.",
       icon: <Clock size={28} />,
     },
   ];
@@ -75,7 +75,12 @@ export default function Portfolio() {
 
       {/* HERO */}
       <section className="min-h-[70vh] flex flex-col justify-center items-center text-center pt-20">
-        <div className="flex items-center gap-6">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex items-center gap-6"
+        >
           <motion.img
             src="https://yt3.googleusercontent.com/o6C2UdbAwWbMDty3l68mSvN35_fGFlUkq5tgr60pu2baQ_dKGNN_dE0KH3h7mzDUvp7QfGle3w=s160-c-k-c0x00ffffff-no-rj"
             className="w-20 h-20 rounded-full border-2 border-purple-500"
@@ -98,38 +103,38 @@ export default function Portfolio() {
           >
             NIGHT GAIJIN
           </h1>
-        </div>
+        </motion.div>
 
         <motion.p
-  initial={{ opacity: 0, y: 10 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.5, duration: 0.6 }}
-  className="mt-6 text-purple-300 max-w-xl"
->
-  High-retention editing that grows your channel and increases your revenue.
-</motion.p>
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="mt-6 text-purple-300 max-w-xl"
+        >
+          High-retention editing that grows your channel and increases your revenue.
+        </motion.p>
 
-        <a
+        <motion.a
           href="https://wa.me/5581994339483?text=I%20want%20to%20increase%20my%20retention"
           target="_blank"
-          className="mt-6 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-700 hover:shadow-[0_0_25px_rgba(168,85,247,0.8)] transition"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0 0 25px rgba(168,85,247,0.8)",
+          }}
+          whileTap={{ scale: 0.97 }}
+          className="mt-6 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-700 transition font-medium"
         >
-          Boost My Channel
-        </a>
+          Increase My Retention
+        </motion.a>
       </section>
-
-      <section className="text-center py-6">
-  <div className="flex flex-wrap justify-center gap-6 text-purple-300 text-sm">
-    <span>↑ Higher Retention</span>
-    <span>↑ More Watch Time</span>
-    <span>↑ Better Engagement</span>
-  </div>
-</section>
 
       {/* PROOF */}
       <section className="text-center py-10">
         <p className="text-purple-300">
-          Helping creators improve retention, engagement and overall performance
+          Helping creators increase retention, boost engagement, and turn views into revenue.
         </p>
       </section>
 
@@ -141,6 +146,10 @@ export default function Portfolio() {
           {videos.map((v, i) => (
             <motion.div
               key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
               whileHover={{ scale: 1.05 }}
               className="relative group"
             >
@@ -150,10 +159,8 @@ export default function Portfolio() {
                 allowFullScreen
               />
 
-              {/* OVERLAY PREMIUM */}
               <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition rounded-xl bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-              {/* TAG */}
               <div className="absolute top-2 left-2 bg-purple-600 px-2 py-1 text-xs rounded shadow-md">
                 {v.tag}
               </div>
@@ -170,7 +177,7 @@ export default function Portfolio() {
 
         <div className="bg-purple-600/20 border border-purple-500 p-8 rounded-2xl shadow-lg">
           <p className="text-lg text-purple-200">
-            Get your first video edited at a discounted price.
+            Get a discounted first video — limited spots available.
           </p>
         </div>
       </section>
@@ -180,19 +187,23 @@ export default function Portfolio() {
         {features.map((f, i) => (
           <motion.div
             key={i}
-            whileHover={{ scale: 1.05 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.2 }}
+            whileHover={{ scale: 1.03 }}
             className="relative p-6 mb-6 border border-purple-500 rounded-2xl"
           >
             <motion.div
               className="absolute inset-0 rounded-2xl"
               animate={{
                 boxShadow: [
-                  "0 0 10px rgba(168,85,247,0.3)",
-                  "0 0 30px rgba(168,85,247,0.8)",
-                  "0 0 10px rgba(168,85,247,0.3)",
+                  "0 0 10px rgba(168,85,247,0.2)",
+                  "0 0 25px rgba(168,85,247,0.6)",
+                  "0 0 10px rgba(168,85,247,0.2)",
                 ],
               }}
-              transition={{ duration: 2, repeat: Infinity }}
+              transition={{ duration: 3, repeat: Infinity }}
             />
 
             <div className="relative z-10 flex gap-4 items-center">
@@ -212,7 +223,6 @@ export default function Portfolio() {
 
         <div className="flex flex-col md:flex-row gap-4 justify-center">
 
-          {/* EMAIL */}
           <a
             href="mailto:nightgaijimbusiness@email.com"
             className="px-6 py-3 border border-purple-500 rounded-lg relative hover:scale-105 transition-all"
@@ -234,7 +244,6 @@ export default function Portfolio() {
             />
           </a>
 
-          {/* WHATSAPP */}
           <a
             href="https://wa.me/5581994339483"
             target="_blank"
