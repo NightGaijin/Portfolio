@@ -1,58 +1,70 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Eye, Clock, Megaphone } from "lucide-react";
 import { useMemo } from "react";
 
 export default function Portfolio() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const smoothX = useSpring(mouseX, { stiffness: 80, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 80, damping: 20 });
+
+  const handleMouseMove = (e) => {
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  };
+
   const videos = [
-    {
-      title: "Fast-Paced",
-      embed: "https://www.youtube.com/embed/qCcaXwJjQjM",
-      tag: "High Retention",
-    },
-    {
-      title: "Entertainment",
-      embed: "https://www.youtube.com/embed/9kvH7MZkcds",
-      tag: "Engaging Content",
-    },
-    {
-      title: "Informative",
-      embed: "https://www.youtube.com/embed/3oYpHiIzU1w",
-      tag: "Storytelling Focus",
-    },
+    { embed: "https://www.youtube.com/embed/qCcaXwJjQjM", tag: "High Retention" },
+    { embed: "https://www.youtube.com/embed/9kvH7MZkcds", tag: "Engaging Content" },
+    { embed: "https://www.youtube.com/embed/3oYpHiIzU1w", tag: "Storytelling Focus" },
   ];
 
   const features = [
     {
       title: "High Retention Editing",
-      desc: "Optimized pacing and cuts based on audience retention behavior.",
-      icon: <Eye size={28} />,
+      desc: "Optimized pacing and cuts based on audience behavior.",
+      icon: <Eye size={26} />,
     },
     {
       title: "Seamless Ads Integration",
-      desc: "Sponsor placements that feel natural and keep viewers watching.",
-      icon: <Megaphone size={28} />,
+      desc: "Natural sponsor placements that keep viewers engaged.",
+      icon: <Megaphone size={26} />,
     },
     {
       title: "Fast Turnaround",
-      desc: "Your video will be delivered as quickly as possible — often before the deadline.",
-      icon: <Clock size={28} />,
+      desc: "Delivered as quickly as possible — often before the deadline.",
+      icon: <Clock size={26} />,
     },
   ];
 
   const particles = useMemo(() => {
-    return Array.from({ length: 40 }).map(() => ({
-      size: Math.random() * 4 + 2,
+    return Array.from({ length: 25 }).map(() => ({
+      size: Math.random() * 3 + 1,
       left: Math.random() * 100 + "%",
       top: Math.random() * 100 + "%",
-      delay: Math.random() * 5,
-      duration: 6 + Math.random() * 4,
+      duration: 3 + Math.random() * 2,
     }));
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-black via-purple-900 to-black text-white overflow-x-hidden">
+    <div
+      onMouseMove={handleMouseMove}
+      className="relative min-h-screen bg-gradient-to-br from-black via-purple-900 to-black text-white overflow-x-hidden"
+    >
+
+      {/* MOUSE GLOW */}
+      <motion.div
+        className="pointer-events-none fixed top-0 left-0 w-[300px] h-[300px] rounded-full bg-purple-500/20 blur-3xl -z-10"
+        style={{
+          x: smoothX,
+          y: smoothY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+      />
 
       {/* PARTICLES */}
       <div className="absolute inset-0 -z-10">
@@ -66,9 +78,10 @@ export default function Portfolio() {
               left: p.left,
               top: p.top,
               opacity: 0.3,
+              willChange: "transform, opacity",
             }}
-            animate={{ opacity: [0.2, 0.7, 0.2], scale: [1, 1.5, 1] }}
-            transition={{ duration: p.duration, repeat: Infinity, delay: p.delay }}
+            animate={{ opacity: [0.2, 0.6, 0.2], scale: [1, 1.4, 1] }}
+            transition={{ duration: p.duration, repeat: Infinity }}
           />
         ))}
       </div>
@@ -76,9 +89,9 @@ export default function Portfolio() {
       {/* HERO */}
       <section className="min-h-[70vh] flex flex-col justify-center items-center text-center pt-20">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           className="flex items-center gap-6"
         >
           <motion.img
@@ -86,19 +99,18 @@ export default function Portfolio() {
             className="w-20 h-20 rounded-full border-2 border-purple-500"
             animate={{
               boxShadow: [
-                "0 0 10px rgba(168,85,247,0.3)",
-                "0 0 30px rgba(168,85,247,0.9)",
-                "0 0 10px rgba(168,85,247,0.3)",
+                "0 0 8px rgba(168,85,247,0.3)",
+                "0 0 20px rgba(168,85,247,0.8)",
+                "0 0 8px rgba(168,85,247,0.3)",
               ],
             }}
-            transition={{ duration: 2, repeat: Infinity }}
+            transition={{ duration: 1.5, repeat: Infinity }}
           />
 
           <h1
             className="text-4xl sm:text-6xl md:text-8xl font-bold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent"
             style={{
-              textShadow:
-                "0 0 10px rgba(168,85,247,0.8), 0 0 30px rgba(168,85,247,0.6)",
+              textShadow: "0 0 12px rgba(168,85,247,0.7)",
             }}
           >
             NIGHT GAIJIN
@@ -106,36 +118,22 @@ export default function Portfolio() {
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
           className="mt-6 text-purple-300 max-w-xl"
         >
           High-retention editing that grows your channel and increases your revenue.
         </motion.p>
 
         <motion.a
-          href="https://wa.me/5581994339483?text=I%20want%20to%20increase%20my%20retention"
+          href="https://wa.me/5581994339483"
           target="_blank"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-          whileHover={{
-            scale: 1.05,
-            boxShadow: "0 0 25px rgba(168,85,247,0.8)",
-          }}
-          whileTap={{ scale: 0.97 }}
-          className="mt-6 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-700 transition font-medium"
+          whileHover={{ scale: 1.05 }}
+          className="mt-6 px-8 py-4 rounded-full bg-purple-600 shadow-[0_0_15px_rgba(168,85,247,0.7)]"
         >
           Increase My Retention
         </motion.a>
-      </section>
-
-      {/* PROOF */}
-      <section className="text-center py-10">
-        <p className="text-purple-300">
-          Helping creators increase retention, boost engagement, and turn views into revenue.
-        </p>
       </section>
 
       {/* PORTFOLIO */}
@@ -146,12 +144,12 @@ export default function Portfolio() {
           {videos.map((v, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
+              transition={{ duration: 0.4 }}
               whileHover={{ scale: 1.05 }}
-              className="relative group"
+              className="relative"
             >
               <iframe
                 src={v.embed}
@@ -159,9 +157,7 @@ export default function Portfolio() {
                 allowFullScreen
               />
 
-              <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition rounded-xl bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-              <div className="absolute top-2 left-2 bg-purple-600 px-2 py-1 text-xs rounded shadow-md">
+              <div className="absolute top-2 left-2 bg-purple-600 px-2 py-1 text-xs rounded">
                 {v.tag}
               </div>
             </motion.div>
@@ -170,15 +166,10 @@ export default function Portfolio() {
       </section>
 
       {/* OFFER */}
-      <section className="text-center py-12">
-        <h2 className="text-3xl font-semibold mb-4">
-          Special Offer
-        </h2>
-
-        <div className="bg-purple-600/20 border border-purple-500 p-8 rounded-2xl shadow-lg">
-          <p className="text-lg text-purple-200">
-            Get a discounted first video.
-          </p>
+      <section className="text-center py-10">
+        <h2 className="text-2xl mb-4">Special Offer</h2>
+        <div className="border border-purple-500 p-6 rounded-xl shadow-[0_0_15px_rgba(168,85,247,0.4)]">
+          Get your first video edited at a discounted price.
         </div>
       </section>
 
@@ -187,23 +178,19 @@ export default function Portfolio() {
         {features.map((f, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: i * 0.2 }}
             whileHover={{ scale: 1.03 }}
             className="relative p-6 mb-6 border border-purple-500 rounded-2xl"
           >
             <motion.div
-              className="absolute inset-0 rounded-2xl"
+              className="absolute inset-0 rounded-2xl pointer-events-none"
               animate={{
                 boxShadow: [
-                  "0 0 10px rgba(168,85,247,0.2)",
-                  "0 0 25px rgba(168,85,247,0.6)",
-                  "0 0 10px rgba(168,85,247,0.2)",
+                  "0 0 8px rgba(168,85,247,0.2)",
+                  "0 0 20px rgba(168,85,247,0.6)",
+                  "0 0 8px rgba(168,85,247,0.2)",
                 ],
               }}
-              transition={{ duration: 3, repeat: Infinity }}
+              transition={{ duration: 1.5, repeat: Infinity }}
             />
 
             <div className="relative z-10 flex gap-4 items-center">
@@ -225,45 +212,17 @@ export default function Portfolio() {
 
           <a
             href="mailto:nightgaijimbusiness@email.com"
-            className="px-6 py-3 border border-purple-500 rounded-lg relative hover:scale-105 transition-all"
+            className="relative px-6 py-3 border border-purple-500 rounded-lg shadow-[0_0_10px_rgba(168,85,247,0.6)]"
           >
-            <span className="relative z-10 text-purple-200">
-              nightgaijimbusiness@gmail.com
-            </span>
-
-            <motion.div
-              className="absolute inset-0 rounded-lg border border-purple-400"
-              animate={{
-                boxShadow: [
-                  "0 0 10px #a855f7",
-                  "0 0 25px #a855f7",
-                  "0 0 10px #a855f7",
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
+            nightgaijimbusiness@gmail.com
           </a>
 
           <a
             href="https://wa.me/5581994339483"
             target="_blank"
-            className="px-6 py-3 border border-green-500 rounded-lg relative hover:scale-105 transition-all"
+            className="relative px-6 py-3 border border-green-500 rounded-lg text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.6)]"
           >
-            <span className="relative z-10 text-green-400 font-medium">
-              WhatsApp
-            </span>
-
-            <motion.div
-              className="absolute inset-0 rounded-lg border border-green-400"
-              animate={{
-                boxShadow: [
-                  "0 0 10px #22c55e",
-                  "0 0 25px #22c55e",
-                  "0 0 10px #22c55e",
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
+            WhatsApp
           </a>
 
         </div>
