@@ -101,7 +101,7 @@ export default function Portfolio() {
         </div>
 
         <p className="mt-6 text-purple-300 max-w-xl">
-          High-retention editing that grow your channel and increase your revenue.
+          High-retention editing that grows your channel and increase your revenue.
         </p>
 
         <a
@@ -109,9 +109,17 @@ export default function Portfolio() {
           target="_blank"
           className="mt-6 px-8 py-4 rounded-full bg-purple-600 hover:bg-purple-700 hover:shadow-[0_0_25px_rgba(168,85,247,0.8)] transition"
         >
-          Increase My Retention
+          Boost My Channel
         </a>
       </section>
+
+      <section className="text-center py-6">
+  <div className="flex flex-wrap justify-center gap-6 text-purple-300 text-sm">
+    <span>↑ Higher Retention</span>
+    <span>↑ More Watch Time</span>
+    <span>↑ Better Engagement</span>
+  </div>
+</section>
 
       {/* PROOF */}
       <section className="text-center py-10">
@@ -157,7 +165,7 @@ export default function Portfolio() {
 
         <div className="bg-purple-600/20 border border-purple-500 p-8 rounded-2xl shadow-lg">
           <p className="text-lg text-purple-200">
-            First video discount available for new clients!
+            Get your first video edited at a discounted price.
           </p>
         </div>
       </section>
