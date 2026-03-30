@@ -126,28 +126,39 @@ export default function Portfolio() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {videos.map((v, i) => (
-            <div key={i} className="relative group">
+            <motion.div
+              key={i}
+              whileHover={{ scale: 1.05 }}
+              className="relative group"
+            >
               <iframe
                 src={v.embed}
                 className="w-full aspect-video rounded-xl"
+                allowFullScreen
               />
 
-              <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
-                {v.tag}
-              </div>
+              {/* OVERLAY PREMIUM */}
+              <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition rounded-xl bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-              <div className="absolute top-2 left-2 bg-purple-600 px-2 py-1 text-xs rounded">
+              {/* TAG */}
+              <div className="absolute top-2 left-2 bg-purple-600 px-2 py-1 text-xs rounded shadow-md">
                 {v.tag}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* OFFER */}
-      <section className="text-center py-10">
-        <div className="bg-purple-600/20 border border-purple-500 p-8 rounded-2xl">
-          Get a discount on your first video.
+      <section className="text-center py-12">
+        <h2 className="text-3xl font-semibold mb-4">
+          Special Offer
+        </h2>
+
+        <div className="bg-purple-600/20 border border-purple-500 p-8 rounded-2xl shadow-lg">
+          <p className="text-lg text-purple-200">
+            First video discount available — limited time.
+          </p>
         </div>
       </section>
 
@@ -187,15 +198,52 @@ export default function Portfolio() {
         <h2 className="text-2xl mb-4">Contact Me</h2>
 
         <div className="flex flex-col md:flex-row gap-4 justify-center">
-          <a href="mailto:nightgaijimbusiness@email.com"
-            className="relative border border-purple-500 px-6 py-3 rounded">
-            nightgaijimbusiness@gmail.com
+
+          {/* EMAIL */}
+          <a
+            href="mailto:nightgaijimbusiness@email.com"
+            className="px-6 py-3 border border-purple-500 rounded-lg relative hover:scale-105 transition-all"
+          >
+            <span className="relative z-10 text-purple-200">
+              nightgaijimbusiness@gmail.com
+            </span>
+
+            <motion.div
+              className="absolute inset-0 rounded-lg border border-purple-400"
+              animate={{
+                boxShadow: [
+                  "0 0 10px #a855f7",
+                  "0 0 25px #a855f7",
+                  "0 0 10px #a855f7",
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
           </a>
 
-          <a href="https://wa.me/5581994339483"
-            className="relative border border-green-500 px-6 py-3 rounded text-green-400">
-            WhatsApp
+          {/* WHATSAPP */}
+          <a
+            href="https://wa.me/5581994339483"
+            target="_blank"
+            className="px-6 py-3 border border-green-500 rounded-lg relative hover:scale-105 transition-all"
+          >
+            <span className="relative z-10 text-green-400 font-medium">
+              WhatsApp
+            </span>
+
+            <motion.div
+              className="absolute inset-0 rounded-lg border border-green-400"
+              animate={{
+                boxShadow: [
+                  "0 0 10px #22c55e",
+                  "0 0 25px #22c55e",
+                  "0 0 10px #22c55e",
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
           </a>
+
         </div>
       </section>
     </div>
