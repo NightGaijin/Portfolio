@@ -101,7 +101,7 @@ export default function Portfolio() {
         </div>
 
         <p className="mt-6 text-purple-300 max-w-xl">
-          I turn your videos into high-retention machines that grow your channel and revenue.
+          High-retention editing that grow your channel and increase your revenue.
         </p>
 
         <a
@@ -118,25 +118,6 @@ export default function Portfolio() {
         <p className="text-purple-300">
           Helping creators improve retention, engagement and overall performance
         </p>
-      </section>
-
-      {/* BEFORE AFTER */}
-      <section className="px-6 py-10 max-w-6xl mx-auto">
-        <h2 className="text-3xl mb-6">Before vs After</h2>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          <div>
-            <p className="mb-2 text-red-400">Before</p>
-            <iframe className="w-full aspect-video rounded-xl"
-              src="https://www.youtube.com/embed/qCcaXwJjQjM" />
-          </div>
-
-          <div>
-            <p className="mb-2 text-green-400">After (Edited by me)</p>
-            <iframe className="w-full aspect-video rounded-xl"
-              src="https://www.youtube.com/embed/9kvH7MZkcds" />
-          </div>
-        </div>
       </section>
 
       {/* PORTFOLIO */}
@@ -166,7 +147,7 @@ export default function Portfolio() {
       {/* OFFER */}
       <section className="text-center py-10">
         <div className="bg-purple-600/20 border border-purple-500 p-8 rounded-2xl">
-          You'll receive a discount for your first video!
+          Get a discount on your first video.
         </div>
       </section>
 
@@ -208,7 +189,7 @@ export default function Portfolio() {
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <a href="mailto:nightgaijimbusiness@email.com"
             className="relative border border-purple-500 px-6 py-3 rounded">
-            Email
+            nightgaijimbusiness@gmail.com
           </a>
 
           <a href="https://wa.me/5581994339483"
