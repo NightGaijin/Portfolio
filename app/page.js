@@ -45,7 +45,7 @@ export default function Portfolio() {
     },
     {
       title: "Fast Turnaround",
-      desc: "Delivered as quickly as possible, often before the deadline.",
+      desc: "Delivered as quickly as possible — often before the deadline.",
       icon: <Clock size={24} />,
     },
   ];
@@ -65,7 +65,7 @@ export default function Portfolio() {
       className="relative min-h-screen bg-gradient-to-br from-black via-purple-900 to-black text-white overflow-x-hidden"
     >
 
-      {/* MOUSE GLOW GLOBAL */}
+      {/* MOUSE GLOW */}
       <motion.div
         className="pointer-events-none fixed w-[250px] h-[250px] rounded-full bg-purple-500/20 blur-3xl z-0"
         style={{
@@ -127,8 +127,9 @@ export default function Portfolio() {
           High-retention editing that grows your channel and increases your revenue.
         </p>
 
-        {/* BOTÃO MAGNÉTICO */}
-        <MagneticButton />
+        <div className="mt-8">
+          <MagneticButton />
+        </div>
       </motion.section>
 
       {/* PORTFOLIO */}
@@ -165,7 +166,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* FEATURES 3D */}
+      {/* FEATURES */}
       <section className="relative z-10 px-6 py-10 max-w-6xl mx-auto">
         {features.map((f, i) => (
           <FeatureCard key={i} {...f} />
@@ -185,6 +186,7 @@ export default function Portfolio() {
   );
 }
 
+/* BOTÃO MAGNÉTICO */
 function MagneticButton({ text = "Increase My Retention", link, green }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -216,17 +218,27 @@ function MagneticButton({ text = "Increase My Retention", link, green }) {
   );
 }
 
+/* CARD 3D CORRIGIDO */
 function FeatureCard({ icon, title, desc }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const rotateX = useTransform(y, [-50, 50], [10, -10]);
-  const rotateY = useTransform(x, [-50, 50], [-10, 10]);
+  const smoothX = useSpring(x, { stiffness: 120, damping: 15 });
+  const smoothY = useSpring(y, { stiffness: 120, damping: 15 });
+
+  const rotateX = useTransform(smoothY, [-40, 40], [8, -8]);
+  const rotateY = useTransform(smoothX, [-40, 40], [-8, 8]);
 
   function move(e) {
     const rect = e.currentTarget.getBoundingClientRect();
-    x.set(e.clientX - rect.left - rect.width / 2);
-    y.set(e.clientY - rect.top - rect.height / 2);
+
+    let mouseX = e.clientX - rect.left - rect.width / 2;
+    let mouseY = e.clientY - rect.top - rect.height / 2;
+
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+    x.set(clamp(mouseX, -40, 40));
+    y.set(clamp(mouseY, -40, 40));
   }
 
   function leave() {
@@ -239,6 +251,7 @@ function FeatureCard({ icon, title, desc }) {
       onMouseMove={move}
       onMouseLeave={leave}
       style={{ rotateX, rotateY, transformPerspective: 800 }}
+      whileHover={{ scale: 1.03 }}
       className="relative p-6 mb-6 border border-purple-500 rounded-2xl bg-black/40 backdrop-blur-xl"
     >
       <motion.div
