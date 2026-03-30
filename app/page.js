@@ -157,7 +157,7 @@ export default function Portfolio() {
 
         <div className="bg-purple-600/20 border border-purple-500 p-8 rounded-2xl shadow-lg">
           <p className="text-lg text-purple-200">
-            First video discount available — limited time.
+            First video discount available for new clients!
           </p>
         </div>
       </section>
