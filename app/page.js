@@ -45,7 +45,7 @@ export default function Portfolio() {
     },
     {
       title: "Fast Turnaround",
-      desc: "Delivered as quickly as possible — often before the deadline.",
+      desc: "Delivered as quickly as possible, often before the deadline.",
       icon: <Clock size={24} />,
     },
   ];
