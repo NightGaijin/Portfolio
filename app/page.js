@@ -100,9 +100,14 @@ export default function Portfolio() {
           </h1>
         </div>
 
-        <p className="mt-6 text-purple-300 max-w-xl">
-          High-retention editing that grows your channel and increase your revenue.
-        </p>
+        <motion.p
+  initial={{ opacity: 0, y: 10 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.5, duration: 0.6 }}
+  className="mt-6 text-purple-300 max-w-xl"
+>
+  High-retention editing that grows your channel and increases your revenue.
+</motion.p>
 
         <a
           href="https://wa.me/5581994339483?text=I%20want%20to%20increase%20my%20retention"
