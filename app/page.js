@@ -36,22 +36,22 @@ export default function Portfolio() {
     {
       title: "High Retention Editing",
       desc: "Optimized pacing and cuts based on audience behavior.",
-      icon: <Eye size={26} />,
+      icon: <Eye size={24} />,
     },
     {
       title: "Seamless Ads Integration",
       desc: "Natural sponsor placements that keep viewers engaged.",
-      icon: <Megaphone size={26} />,
+      icon: <Megaphone size={24} />,
     },
     {
       title: "Fast Turnaround",
-      desc: "Delivered as quickly as possible — often before the deadline.",
-      icon: <Clock size={26} />,
+      desc: "Delivered as quickly as possible, often before the deadline.",
+      icon: <Clock size={24} />,
     },
   ];
 
   const particles = useMemo(() => {
-    return Array.from({ length: 25 }).map(() => ({
+    return Array.from({ length: 20 }).map(() => ({
       size: Math.random() * 3 + 1,
       left: Math.random() * 100 + "%",
       top: Math.random() * 100 + "%",
@@ -65,7 +65,7 @@ export default function Portfolio() {
       className="relative min-h-screen bg-gradient-to-br from-black via-purple-900 to-black text-white overflow-x-hidden"
     >
 
-      {/* GLOW DO MOUSE */}
+      {/* MOUSE GLOW GLOBAL */}
       <motion.div
         className="pointer-events-none fixed w-[250px] h-[250px] rounded-full bg-purple-500/20 blur-3xl z-0"
         style={{
@@ -102,7 +102,6 @@ export default function Portfolio() {
       >
         <div className="flex items-center gap-6">
 
-          {/* FOTO VOLTOU */}
           <motion.img
             src="https://yt3.googleusercontent.com/o6C2UdbAwWbMDty3l68mSvN35_fGFlUkq5tgr60pu2baQ_dKGNN_dE0KH3h7mzDUvp7QfGle3w=s160-c-k-c0x00ffffff-no-rj"
             className="w-20 h-20 rounded-full border-2 border-purple-500"
@@ -118,9 +117,7 @@ export default function Portfolio() {
 
           <h1
             className="text-4xl sm:text-6xl md:text-8xl font-bold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent"
-            style={{
-              textShadow: "0 0 15px rgba(168,85,247,0.7)",
-            }}
+            style={{ textShadow: "0 0 15px rgba(168,85,247,0.7)" }}
           >
             NIGHT GAIJIN
           </h1>
@@ -130,17 +127,8 @@ export default function Portfolio() {
           High-retention editing that grows your channel and increases your revenue.
         </p>
 
-        <motion.a
-          href="https://wa.me/5581994339483"
-          target="_blank"
-          whileHover={{
-            scale: 1.05,
-            boxShadow: "0 0 25px rgba(168,85,247,0.8)",
-          }}
-          className="mt-6 px-8 py-4 rounded-full bg-purple-600 shadow-[0_0_15px_rgba(168,85,247,0.6)]"
-        >
-          Increase My Retention
-        </motion.a>
+        {/* BOTÃO MAGNÉTICO */}
+        <MagneticButton />
       </motion.section>
 
       {/* PORTFOLIO */}
@@ -177,34 +165,10 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* FEATURES */}
+      {/* FEATURES 3D */}
       <section className="relative z-10 px-6 py-10 max-w-6xl mx-auto">
         {features.map((f, i) => (
-          <motion.div
-            key={i}
-            whileHover={{ scale: 1.03 }}
-            className="relative p-6 mb-6 border border-purple-500 rounded-2xl"
-          >
-            <motion.div
-              className="absolute inset-0 rounded-2xl pointer-events-none"
-              animate={{
-                boxShadow: [
-                  "0 0 8px rgba(168,85,247,0.2)",
-                  "0 0 20px rgba(168,85,247,0.6)",
-                  "0 0 8px rgba(168,85,247,0.2)",
-                ],
-              }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
-
-            <div className="relative z-10 flex gap-4 items-center">
-              {f.icon}
-              <div>
-                <h3>{f.title}</h3>
-                <p className="text-purple-300 text-sm">{f.desc}</p>
-              </div>
-            </div>
-          </motion.div>
+          <FeatureCard key={i} {...f} />
         ))}
       </section>
 
@@ -213,23 +177,89 @@ export default function Portfolio() {
         <h2 className="text-2xl mb-4">Contact Me</h2>
 
         <div className="flex gap-4 justify-center flex-wrap">
-          <a
-            href="mailto:nightgaijimbusiness@email.com"
-            className="px-6 py-3 border border-purple-500 rounded-lg shadow-[0_0_10px_rgba(168,85,247,0.6)]"
-          >
-            Email
-          </a>
-
-          <a
-            href="https://wa.me/5581994339483"
-            target="_blank"
-            className="px-6 py-3 border border-green-500 rounded-lg text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.6)]"
-          >
-            WhatsApp
-          </a>
+          <MagneticButton text="Email" link="mailto:nightgaijimbusiness@email.com" />
+          <MagneticButton text="WhatsApp" link="https://wa.me/5581994339483" green />
         </div>
       </section>
-
     </div>
+  );
+}
+
+function MagneticButton({ text = "Increase My Retention", link, green }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  function move(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set((e.clientX - rect.left - rect.width / 2) * 0.2);
+    y.set((e.clientY - rect.top - rect.height / 2) * 0.2);
+  }
+
+  function leave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.a
+      href={link || "https://wa.me/5581994339483"}
+      target="_blank"
+      onMouseMove={move}
+      onMouseLeave={leave}
+      style={{ x, y }}
+      className={`px-6 py-3 rounded-lg border ${
+        green ? "border-green-500 text-green-400" : "border-purple-500"
+      } shadow-[0_0_10px_rgba(168,85,247,0.6)]`}
+    >
+      {text}
+    </motion.a>
+  );
+}
+
+function FeatureCard({ icon, title, desc }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const rotateX = useTransform(y, [-50, 50], [10, -10]);
+  const rotateY = useTransform(x, [-50, 50], [-10, 10]);
+
+  function move(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    x.set(e.clientX - rect.left - rect.width / 2);
+    y.set(e.clientY - rect.top - rect.height / 2);
+  }
+
+  function leave() {
+    x.set(0);
+    y.set(0);
+  }
+
+  return (
+    <motion.div
+      onMouseMove={move}
+      onMouseLeave={leave}
+      style={{ rotateX, rotateY, transformPerspective: 800 }}
+      className="relative p-6 mb-6 border border-purple-500 rounded-2xl bg-black/40 backdrop-blur-xl"
+    >
+      <motion.div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        animate={{
+          boxShadow: [
+            "0 0 10px rgba(168,85,247,0.2)",
+            "0 0 25px rgba(168,85,247,0.6)",
+            "0 0 10px rgba(168,85,247,0.2)",
+          ],
+        }}
+        transition={{ duration: 1.5, repeat: Infinity }}
+      />
+
+      <div className="relative z-10 flex gap-4 items-center">
+        {icon}
+        <div>
+          <h3>{title}</h3>
+          <p className="text-purple-300 text-sm">{desc}</p>
+        </div>
+      </div>
+    </motion.div>
   );
 }
